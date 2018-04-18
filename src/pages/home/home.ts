@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RotinaService } from '../../services/domain/rotina.service';
+import { RotinaDTO } from '../../models/rotina.dto';
 
 @IonicPage()
 @Component({
@@ -8,6 +9,8 @@ import { RotinaService } from '../../services/domain/rotina.service';
   templateUrl: 'home.html',
 })
 export class HomePage {
+
+  items: RotinaDTO[];
 
   constructor(
     public navCtrl: NavController,
@@ -19,13 +22,10 @@ export class HomePage {
     
     this.rotinaService.findAll()
       .subscribe(response => {
-        console.log(response);
+       this.items = response
+       console.log(this.items)
       },
-    error =>{
-      console.log(error)
-    })
-    
-    console.log();
+    error =>{});
   }
 
 }
