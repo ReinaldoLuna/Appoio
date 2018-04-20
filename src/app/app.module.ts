@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RotinaService } from '../services/domain/rotina.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { AuthService } from '../services/auth.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     StatusBar,
     SplashScreen,
     RotinaService,
+    AuthService,
     ErrorInterceptorProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
