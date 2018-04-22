@@ -27,8 +27,8 @@ export class LoginPage {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        console.log(response.headers.get("Connection"));
-        this.auth.successfullLogin(response.headers.get("Authorization"));
+        console.log(response.headers.get('Authorization'))
+
         this.navCtrl.setRoot('HomePage');
       },
         error => { })
@@ -39,7 +39,6 @@ export class LoginPage {
   }
 
   ionViewDidLeave() {
-    console.log(this.creds);
     this.menu.swipeEnable(true)
   }
 
