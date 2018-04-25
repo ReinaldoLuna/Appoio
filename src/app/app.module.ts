@@ -12,6 +12,7 @@ import { RotinaService } from '../services/domain/rotina.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
+import { UsuarioService } from '../services/domain/usuario.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { StorageService } from '../services/storage.service';
     RotinaService,
     AuthService,
     StorageService,
+    UsuarioService,
     ErrorInterceptorProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
