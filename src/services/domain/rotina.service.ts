@@ -12,7 +12,7 @@ constructor(public http: HttpClient){
 }
 
 findAll() : Observable<RotinaDTO[]>{
-    return this.http.get<RotinaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
+    return this.http.get<RotinaDTO[]>(`${API_CONFIG.baseUrl}/rotinas/`);
 }
 
 }

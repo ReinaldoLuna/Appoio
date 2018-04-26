@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { UsuarioDTO } from "../../models/usuario.dto";
 import { Observable } from "rxjs/Rx";
 import { API_CONFIG } from "../../config/api.config";
@@ -14,13 +14,8 @@ export class UsuarioService {
     }
 
     findByEmail(email: string): Observable<UsuarioDTO> {
-
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + token });
-
-        return this.http.get<UsuarioDTO>(
-            `${API_CONFIG.baseUrl}/usuarios/email?value=${email}`,
-            { 'headers': authHeader });
+  return this.http.get<UsuarioDTO>(
+            `${API_CONFIG.baseUrl}/usuarios/email?value=${email}`);
     }
 
     getImageFromBucket(id: string) : Observable<any>{
