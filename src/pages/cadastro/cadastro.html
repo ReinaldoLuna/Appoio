@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cadastro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left> Nome inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Email*</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors" margin-left> Email inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Senha*</ion-label>
+      <ion-input formControlName="senha" type="password"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors" margin-left> Senha inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Telefone*</ion-label>
+      <ion-input formControlName="telefone" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.telefone.dirty && formGroup.controls.telefone.errors" margin-left> Telefone inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Foto</ion-label>
+      <ion-input formControlName="foto" type="text"></ion-input>
+    </ion-item>
+
+
+    <ion-list radio-group formControlName="tipo">
+      <ion-list-header align="center">
+        <h2>Eu sou...</h2>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Mãe</ion-label>
+        <ion-radio checked="true" value="2"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Pai</ion-label>
+        <ion-radio checked="false" value="1"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Responsável legal</ion-label>
+        <ion-radio checked="false" value="3"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Professor</ion-label>
+        <ion-radio checked="false" value="4"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Mediador</ion-label>
+        <ion-radio checked="false" value="5"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Coordenador</ion-label>
+        <ion-radio checked="false" value="6"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Diretor</ion-label>
+        <ion-radio checked="false" value="7"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Psicólogo</ion-label>
+        <ion-radio checked="false" value="8"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Psiquiatra</ion-label>
+        <ion-radio checked="false" value="9"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Pediatra</ion-label>
+        <ion-radio checked="false" value="10"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Cadastrar</button>
+    
+  </form>
+</ion-content>

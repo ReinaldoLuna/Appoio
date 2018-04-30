@@ -24,15 +24,15 @@ export class LoginPage {
 
   }
 
-ionViewDidEnter(){
-  this.auth.refreshToken()
-  .subscribe(response => {
-    this.auth.successfullLogin(response.headers.get('Authorization'))
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.successfullLogin(response.headers.get('Authorization'))
 
-    this.navCtrl.setRoot('HomePage');
-  },
-    error => { })
-}
+        this.navCtrl.setRoot('HomePage');
+      },
+        error => { })
+  }
 
   login() {
     this.auth.authenticate(this.creds)
@@ -44,6 +44,10 @@ ionViewDidEnter(){
         error => { })
   }
 
+
+  signup() {
+    this.navCtrl.push('CadastroPage')
+  }
   ionViewWillEnter() {
     this.menu.swipeEnable(false)
   }
