@@ -11,5 +11,12 @@
 
 
 <ion-content padding>
-<h2 *ngFor="let crianca of criancas">{{ crianca.nome }}</h2>
+<ion-list>
+    <button ion-item *ngFor="let crianca of criancas">
+      <ion-thumbnail item-start>
+        <img src="{{ bucketUrl }}/cat/{{crianca.id}}.jpg">
+      </ion-thumbnail>
+      <h2>{{ crianca.nome }}</h2>
+    </button>
+  </ion-list>
 </ion-content>
