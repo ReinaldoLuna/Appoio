@@ -39,7 +39,25 @@
       <ion-input formControlName="foto" type="text"></ion-input>
     </ion-item>
 
+    <ion-list>
+      <ion-item>
+        <ion-label>Eu Sou...</ion-label>
+        <ion-select formControlName="tipo">
+          <ion-option value="2">Mãe</ion-option>
+          <ion-option value="1">Pai</ion-option>
+          <ion-option value="3">Responsável</ion-option>
+          <ion-option value="4">Prfessor</ion-option>
+          <ion-option value="5">Mediador</ion-option>
+          <ion-option value="6">Coordenador</ion-option>
+          <ion-option value="7">Diretor</ion-option>
+          <ion-option value="8">Psicólogo</ion-option>
+          <ion-option value="9">Psiquiatra</ion-option>
+          <ion-option value="10">Pediatra</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
+<!--
     <ion-list radio-group formControlName="tipo">
       <ion-list-header align="center">
         <h2>Eu sou...</h2>
@@ -94,6 +112,8 @@
         <ion-radio checked="false" value="10"></ion-radio>
       </ion-item>
     </ion-list>
+
+  -->
 
     <button ion-button block type="submit" [disabled]="formGroup.invalid">Cadastrar</button>
     
