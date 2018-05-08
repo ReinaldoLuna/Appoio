@@ -12,7 +12,7 @@
 
 <ion-content padding>
 <ion-list>
-    <button ion-item *ngFor="let crianca of criancas">
+    <button ion-item *ngFor="let crianca of criancas" (click)="showRotinas()">
       <ion-thumbnail item-start>
         <img class="avatar-crianca" src="../../assets/imgs/avatar-blank.png">
       </ion-thumbnail>

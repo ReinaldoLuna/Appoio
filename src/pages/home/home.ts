@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RotinaService } from '../../services/domain/rotina.service';
-import { RotinaDTO } from '../../models/rotina.dto';
 import { CriancaService } from '../../services/domain/crianca.service';
 import { CriancaDTO } from '../../models/crianca.dto';
 import { UsuarioDTO } from '../../models/usuario.dto';
@@ -15,14 +13,12 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 })
 export class HomePage {
 
-  items: RotinaDTO[];
   criancas: CriancaDTO[];
   usuario: UsuarioDTO
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public rotinaService: RotinaService,
     public criancaService: CriancaService,
     public storage: StorageService,
     public usuarioService: UsuarioService) {
@@ -42,14 +38,10 @@ export class HomePage {
           console.log("deu erro carai")
         })
       })
+  }
 
-
-    this.rotinaService.findAll()
-      .subscribe(response => {
-        this.items = response
-        console.log(this.items)
-      },
-        error => { });
+  showRotinas(){
+    this.navCtrl.push('RotinasPage')
   }
 
 }
