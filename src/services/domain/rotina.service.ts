@@ -10,9 +10,8 @@ export class RotinaService{
 constructor(public http: HttpClient){
 
 }
-
-findAll() : Observable<RotinaDTO[]>{
-    return this.http.get<RotinaDTO[]>(`${API_CONFIG.baseUrl}/rotinas/`);
+findByCrianca(crianca_id: string){
+    return this.http.get(`${API_CONFIG.baseUrl}/rotinas/page/?id_crianca=${crianca_id}`)
 }
 
 }

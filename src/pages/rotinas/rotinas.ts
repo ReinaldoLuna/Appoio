@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RotinaService } from '../../services/domain/rotina.service';
+import { RotinaDTO } from '../../models/rotina.dto';
 
 /**
  * Generated class for the RotinasPage page.
@@ -15,11 +17,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RotinasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  items: RotinaDTO[];
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public rotinaService: RotinaService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RotinasPage');
+    let categoria_id = this.navParams.get("categoria_id")
+
+    this.rotinaService.findByCrianca(categoria_id)
+      .subscribe(response => {
+        this.items = response['content'];
+      }, error => {
+        
+      })
   }
 
 }
