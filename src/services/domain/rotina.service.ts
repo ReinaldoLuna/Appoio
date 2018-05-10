@@ -10,8 +10,8 @@ export class RotinaService{
 constructor(public http: HttpClient){
 
 }
-findByCrianca(crianca_id: string){
-    return this.http.get(`${API_CONFIG.baseUrl}/rotinas/page/?id_crianca=${crianca_id}`)
+findByCrianca(crianca_nome: string){
+    return this.http.get(`${API_CONFIG.baseUrl}/rotinas/page/?nome_crianca=${crianca_nome}`)
 }
 
 }

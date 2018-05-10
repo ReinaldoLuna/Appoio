@@ -1,18 +1,20 @@
-<!--
-  Generated template for the RotinasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>rotinas</ion-title>
+    <ion-title>Rotinas</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-list>
+    <button ion-item *ngFor="let rotina of rotinas">
+        <h2>Cadastrado em: {{ rotina.dataCriacao }}</h2>
+        <h3>Por: {{ rotina.tipo }}</h3>
+        <p>{{ rotina.crianca.nome }}</p>
+    </button>
+  </ion-list>
 
 </ion-content>

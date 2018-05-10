@@ -40,8 +40,8 @@ export class HomePage {
       })
   }
 
-  showRotinas(crianca_id: string){
-    this.navCtrl.push('RotinasPage', {crianca_id: crianca_id})
+  showRotinas(crianca_nome: string){
+    this.navCtrl.push('RotinasPage', {crianca_nome: crianca_nome})
   }
 
 }

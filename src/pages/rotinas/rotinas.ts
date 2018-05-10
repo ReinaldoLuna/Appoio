@@ -17,7 +17,7 @@ import { RotinaDTO } from '../../models/rotina.dto';
 })
 export class RotinasPage {
 
-  items: RotinaDTO[];
+  rotinas: RotinaDTO[];
 
   constructor(
     public navCtrl: NavController,
@@ -26,11 +26,11 @@ export class RotinasPage {
   }
 
   ionViewDidLoad() {
-    let categoria_id = this.navParams.get("categoria_id")
+    let crianca_nome = this.navParams.get("crianca_nome")
 
-    this.rotinaService.findByCrianca(categoria_id)
+    this.rotinaService.findByCrianca(crianca_nome)
       .subscribe(response => {
-        this.items = response['content'];
+        this.rotinas = response['content'];
       }, error => {
         
       })
