@@ -36,4 +36,7 @@ export class RotinasPage {
       })
   }
 
+  showDetail(rotina_id : string){
+    this.navCtrl.push('RotinaDetailPage', {rotina_id: rotina_id});
+  }
 }

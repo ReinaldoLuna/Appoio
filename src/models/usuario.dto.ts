@@ -3,6 +3,6 @@ export interface UsuarioDTO{
     nome: string;
     email: string;
     telefone: string;
-    foto?: string;
+    imageUrl?: string;
     tipo: string
 }

@@ -19,7 +19,7 @@ export class UsuarioService {
     }
 
     getImageFromBucket(id: string): Observable<any> {
-        let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`
+        let url = `${API_CONFIG.bucketBaseUrl}/usuario_id${id}.jpg`
         return this.http.get(url, { responseType: 'blob' })
     }
 

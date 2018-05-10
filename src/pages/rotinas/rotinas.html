@@ -10,9 +10,9 @@
 <ion-content padding>
 
   <ion-list>
-    <button ion-item *ngFor="let rotina of rotinas">
+    <button ion-item *ngFor="let rotina of rotinas" (click)="showDetail(rotina.id)">
         <h2>Cadastrado em: {{ rotina.dataCriacao }}</h2>
-        <h3>Por: {{ rotina.tipo }}</h3>
+        <h3>Por: {{ rotina.id }}</h3>
         <p>{{ rotina.crianca.nome }}</p>
     </button>
   </ion-list>

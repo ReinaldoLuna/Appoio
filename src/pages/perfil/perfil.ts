@@ -45,7 +45,7 @@ export class PerfilPage {
   getImageIfExists() {
     this.usuarioService.getImageFromBucket(this.usuario.id)
       .subscribe(respose => {
-        this.usuario.foto = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
       }, error => { })
   }
 
