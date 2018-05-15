@@ -1,6 +1,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Rotinas</ion-title>
   </ion-navbar>
 
@@ -9,12 +12,25 @@
 
 <ion-content padding>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
     <button ion-item *ngFor="let rotina of rotinas" (click)="showDetail(rotina.id)">
-        <h2>Cadastrado em: {{ rotina.dataCriacao }}</h2>
-        <h3>Por: {{ rotina.id }}</h3>
-        <p>{{ rotina.crianca.nome }}</p>
+      <h2>{{ rotina.data }}</h2>
+      <h3>Por: {{ rotina.tipo }}</h3>
     </button>
   </ion-list>
 
+  <ion-fab bottom right>
+    <button ion-fab (click)="addRotina(crianca_id,crianca_nome)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -4,19 +4,30 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Página inicial</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<ion-list>
-    <button ion-item *ngFor="let crianca of criancas" (click)="showRotinas(crianca.nome)">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+  <ion-list>
+    
+    <button ion-item *ngFor="let crianca of criancas" (click)="showRotinas(crianca.nome, crianca.id)">
       <ion-thumbnail item-start>
-        <img class="avatar-crianca" src="../../assets/imgs/avatar-blank.png">
+        <img class="avatar-crianca" src="{{ bucketUrl }}/crianca_id{{crianca.id}}.jpg">
       </ion-thumbnail>
-      <h2>{{ crianca.nome }}</h2>
+      <h2>{{ crianca?.nome }}</h2>
     </button>
   </ion-list>
+
+  <ion-fab bottom right>
+    <button navPush="CadastroCriancaPage" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

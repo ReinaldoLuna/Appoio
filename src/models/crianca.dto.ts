@@ -6,5 +6,6 @@ export interface CriancaDTO {
     dataNascimento: string;
     sexo: string;
     categoriaTea: string;
-    recomendacoesMedicas: string
+    recomendacoesMedicas: string;
+    imageUrl?: string;
 }

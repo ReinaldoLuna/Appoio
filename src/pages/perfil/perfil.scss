@@ -4,4 +4,11 @@ page-perfil {
         border-radius: 100%;
         margin: 25px auto 0 auto;
     }
+    cordova-camera-capture{
+        position: absolute!important;
+        bottom: 0;
+    }
+    video{
+        width: 100%;
+    }
 }

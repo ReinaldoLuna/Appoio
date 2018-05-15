@@ -4,6 +4,7 @@ import { StorageService } from '../../services/storage.service';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
+import { CameraOptions, Camera } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -12,19 +13,26 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class PerfilPage {
 
-  usuario: UsuarioDTO
+  usuario: UsuarioDTO;
+  picture: string;
+  cameraOn: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: StorageService,
-    public usuarioService: UsuarioService
+    public usuarioService: UsuarioService,
+    public camera: Camera
   ) {
   }
 
   ionViewDidLoad() {
+    this.loadData()
+  }
+
+  loadData(){
     let localUser = this.storage.getLocalUser();
-    if (localUser && localUser.email) { 
+    if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
           this.usuario = response;
@@ -47,6 +55,36 @@ export class PerfilPage {
       .subscribe(respose => {
         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
       }, error => { })
+  }
+
+  getCameraPicture() {
+
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
+    }, (err) => {
+    });
+  }
+
+  sendPicture() {
+    this.usuarioService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.loadData();
+      }, error => { })
+  }
+
+  cancel(){
+    this.picture = null;  
   }
 
 }

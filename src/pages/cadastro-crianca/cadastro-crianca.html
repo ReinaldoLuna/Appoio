@@ -1,0 +1,84 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nova Criança</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="novaCrianca(); $event.preventDefault()">
+
+    <ion-item>
+      <ion-label stacked>Nome*</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left> Nome inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Colégio</ion-label>
+      <ion-input formControlName="colegio" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.colegio.dirty && formGroup.controls.colegio.errors" margin-left> Email inválido</p>
+
+    <ion-item>
+      <ion-label stacked>Foto</ion-label>
+      <ion-input formControlName="foto" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls.foto.dirty && formGroup.controls.foto.errors" margin-left> Email inválido</p>
+
+    <ion-item>
+      <ion-label>Data de Nascimento</ion-label>
+      <ion-datetime formControlName="dataNascimento" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+    <p *ngIf="formGroup.controls.dataNascimento.dirty && formGroup.controls.dataNascimento.errors" margin-left> Senha inválido</p>
+
+    <ion-list radio-group formControlName="sexo">
+      <ion-list-header>
+        Sexo
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="0"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+    </ion-list>
+    
+    <ion-list radio-group formControlName="categoriaTea">
+        <ion-list-header>
+            Categoria TEA
+        </ion-list-header>
+  
+        <ion-item>
+          <ion-label>Leve</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Moderado</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Severo</ion-label>
+            <ion-radio value="2"></ion-radio>
+          </ion-item>
+      </ion-list>
+
+    <ion-item>
+      <ion-label stacked>Recomendações Médicas</ion-label>
+      <ion-input formControlName="recomendacoesMedicas" type="text"></ion-input>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Cadastrar</button>
+
+  </form>
+
+</ion-content>

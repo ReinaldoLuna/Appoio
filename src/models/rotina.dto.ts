@@ -1,4 +1,5 @@
 export interface RotinaDTO {
+    crianca: string;
     id: string;
     dataCriacao: string;
     data: string;

@@ -1,0 +1,137 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nova Rotina</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="novaRotina(); $event.preventDefault()">
+
+    <ion-item>
+      <ion-label stacked>Atividades</ion-label>
+      <ion-input formControlName="atividades" type="text"></ion-input>
+    </ion-item>
+    <!-- <p *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left> Nome inválido</p> -->
+
+    <ion-item>
+      <ion-label stacked>Observações</ion-label>
+      <ion-input formControlName="obs" type="text"></ion-input>
+    </ion-item>
+    <!-- <p *ngIf="formGroup.controls.colegio.dirty && formGroup.controls.colegio.errors" margin-left> Email inválido</p> -->
+
+    <ion-list radio-group formControlName="comportamento">
+        <ion-list-header>
+          Comportamento
+        </ion-list-header>
+  
+        <ion-item>
+          <ion-label>Ruim</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Regular</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Bom</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Ótimo</ion-label>
+          <ion-radio value="3"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+
+    <!-- <p *ngIf="formGroup.controls.foto.dirty && formGroup.controls.foto.errors" margin-left> Email inválido</p> -->
+
+    <ion-list radio-group formControlName="interacao">
+      <ion-list-header>
+        Interação
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Ruim</ion-label>
+        <ion-radio value="0"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Regular</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Bom</ion-label>
+        <ion-radio value="2"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ótimo</ion-label>
+        <ion-radio value="3"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <!-- <p *ngIf="formGroup.controls.dataNascimento.dirty && formGroup.controls.dataNascimento.errors" margin-left> Senha inválido</p> -->
+    <ion-list radio-group formControlName="humor">
+        <ion-list-header>
+          Humor
+        </ion-list-header>
+  
+        <ion-item>
+          <ion-label>Ruim</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Regular</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Bom</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Ótimo</ion-label>
+          <ion-radio value="3"></ion-radio>
+        </ion-item>
+      </ion-list>
+    <!-- <p *ngIf="formGroup.controls.sexo.dirty && formGroup.controls.sexo.errors" margin-left> Telefone inválido</p> -->
+    <ion-list radio-group formControlName="alimentacao">
+        <ion-list-header>
+          Alimentação
+        </ion-list-header>
+  
+        <ion-item>
+          <ion-label>Ruim</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Regular</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Bom</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Ótimo</ion-label>
+          <ion-radio value="3"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+    <button ion-button block type="submit">Cadastrar</button>
+
+  </form>
+
+</ion-content>

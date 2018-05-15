@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -9,12 +8,20 @@
 
 
 <ion-content padding>
-<h2>Criado em: {{ rotina?.dataCriacao }}</h2>
-<p>Data: {{ rotina?.data }}</p>
-<p><strong>Atividades: </strong></p>
-<p>{{ rotina?.atividades }}</p>
-<p>{{ rotina?.comportamento }}</p>
-<p>{{ rotina?.interacao }}</p>
-<p>{{ rotina?.humor }}</p>
-<p>{{ rotina?.alimentacao }}</p>
+  <h2>
+    <strong>Criado em: </strong> {{ rotina?.dataCriacao }}</h2>
+  <p>
+    <strong>Data:</strong> {{ rotina?.data }}</p>
+  <p>
+    <strong>Atividades: </strong>
+  </p>
+  <p>{{ rotina?.atividades }}</p>
+  <p>
+    <strong>Comportamento: </strong>{{ rotina?.comportamento }}</p>
+  <p>
+    <strong>Interação: </strong>{{ rotina?.interacao }}</p>
+  <p>
+    <strong>Humor: </strong>{{ rotina?.humor }}</p>
+  <p>
+    <strong>Alimentação: </strong>{{ rotina?.alimentacao }}</p>
 </ion-content>
