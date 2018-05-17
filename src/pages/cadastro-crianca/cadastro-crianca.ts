@@ -61,7 +61,6 @@ export class CadastroCriancaPage {
   novaCrianca() {
     this.formatData();
     this.formGroup.value.usuarios = [{ "id": this.usuario.id }]
-    console.log(this.formGroup.value)
     
         this.criancaService.insert(this.formGroup.value)
           .subscribe(response => {

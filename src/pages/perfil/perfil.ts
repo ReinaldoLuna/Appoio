@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
 import { CameraOptions, Camera } from '@ionic-native/camera';
+import { CriancaService } from '../../services/domain/crianca.service';
+import { CriancaDTO } from '../../models/crianca.dto';
 
 @IonicPage()
 @Component({
@@ -14,6 +16,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 export class PerfilPage {
 
   usuario: UsuarioDTO;
+  criancas: CriancaDTO[];
   picture: string;
   cameraOn: boolean = false;
 
@@ -22,25 +25,36 @@ export class PerfilPage {
     public navParams: NavParams,
     public storage: StorageService,
     public usuarioService: UsuarioService,
-    public camera: Camera
+    public camera: Camera,
+    public criancaService: CriancaService,
+    public loadingCtrl: LoadingController
   ) {
   }
 
   ionViewDidLoad() {
-    this.loadData()
+    this.loadData();
   }
 
-  loadData(){
+  loadData() {
     let localUser = this.storage.getLocalUser();
+    let loader = this.presentLoading()
+
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
           this.usuario = response;
-          this.getImageIfExists()
+          this.getImageIfExists();
+          this.criancaService.findByUser(this.usuario.id)
+            .subscribe(response => {
+              this.criancas = response;
+              this.loadImgageUrls();
+              loader.dismiss();
+            }, error => {
+              loader.dismiss();
+            })
         }, error => {
-          console.log("Erro: " + error)
           if (error.status == 403) {
-            console.log("Deu erro 403")
+            console.log("Erro 403")
             this.navCtrl.setRoot('LoginPage')
           }
         })
@@ -56,6 +70,17 @@ export class PerfilPage {
         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
       }, error => { })
   }
+
+
+loadImgageUrls(){
+  for(var i = 0; i<this.criancas.length; i++){
+    let crianca = this.criancas[i];
+    this.criancaService.getImageFromBucket(crianca.id)
+    .subscribe( response => {
+      crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${crianca.id}.jpg`;
+    }, error => { })
+  }
+}
 
   getCameraPicture() {
 
@@ -75,6 +100,15 @@ export class PerfilPage {
     });
   }
 
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
+  }
+
   sendPicture() {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
@@ -83,8 +117,12 @@ export class PerfilPage {
       }, error => { })
   }
 
-  cancel(){
-    this.picture = null;  
+  cancel() {
+    this.picture = null;
+  }
+
+  showDetail(crianca_id: string) {
+    this.navCtrl.push('CriancaDetailPage', { crianca_id: crianca_id })
   }
 
 }

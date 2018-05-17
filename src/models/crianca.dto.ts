@@ -8,4 +8,5 @@ export interface CriancaDTO {
     categoriaTea: string;
     recomendacoesMedicas: string;
     imageUrl?: string;
+    usuarios: string;
 }

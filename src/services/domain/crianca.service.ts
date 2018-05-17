@@ -3,11 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
 import { CriancaDTO } from "../../models/crianca.dto";
 import { Observable } from "rxjs/Rx";
+import { ImageUtilService } from "../image-util.service";
 
 @Injectable()
 export class CriancaService {
 
-    constructor(public http: HttpClient) {
+    constructor(
+        public http: HttpClient,
+        public imageUtilService: ImageUtilService) {
 
     }
 
@@ -15,9 +18,26 @@ export class CriancaService {
         return this.http.get<CriancaDTO[]>(`${API_CONFIG.baseUrl}/criancas/usuario/${usuario_id}`);
     }
 
-    getImageFromBucket(id: string): Observable<any>{
+    findById(crianca_id: string) {
+        return this.http.get<CriancaDTO>(`${API_CONFIG.baseUrl}/criancas/${crianca_id}`)
+    }
+
+    getImageFromBucket(id: string): Observable<any> {
         let url = `${API_CONFIG.bucketBaseUrl}/crianca_id${id}.jpg`
-        return this.http.get(url, { responseType: 'blob'})
+        return this.http.get(url, { responseType: 'blob' })
+    }
+
+    updateCrianca(obj: CriancaDTO, crianca_id: string) {
+
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/criancas/${crianca_id}`,
+            obj,
+            {
+                observe: "response",
+                responseType: "text"
+            }
+        )
+
     }
 
     insert(obj: CriancaDTO) {
@@ -29,6 +49,20 @@ export class CriancaService {
                 responseType: "text"
             }
         )
+    }
+
+    uploadPicture(picture) {
+        let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+        let formData: FormData = new FormData();
+        formData.set('file', pictureBlob, 'file.png');
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/usuarios/picture`,
+            formData,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
     }
 
 }

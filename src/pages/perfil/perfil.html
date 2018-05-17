@@ -26,12 +26,24 @@
 
     <ion-item *ngIf="picture">
       <img [src]="picture">
-    </ion-item> 
+    </ion-item>
     <ion-item>
       <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
-      <button *ngIf="picture" ion-button outline (click)="sendPicture()" >Salvar imagem</button>
-      <button *ngIf="picture" ion-button outline (click)="cancel()" >Cancelar</button>
+      <button *ngIf="picture" ion-button outline (click)="sendPicture()">Salvar imagem</button>
+      <button *ngIf="picture" ion-button outline (click)="cancel()">Cancelar</button>
     </ion-item>
-
   </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let crianca of criancas">
+      <ion-thumbnail item-start>
+        <img [src]="crianca.imageUrl || 'assets/imgs/avatar-blank.png'">
+      </ion-thumbnail>
+      <h2>{{ crianca.nome }}</h2>
+      <button ion-button clear item-end (click)="showDetail(crianca.id, crianca)">
+        <ion-icon name="eye"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

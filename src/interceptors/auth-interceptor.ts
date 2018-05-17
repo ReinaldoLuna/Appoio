@@ -22,10 +22,9 @@ constructor(public storage: StorageService){}
        }else{
             return next.handle(req)
        }
-       
     }
-    
 }
+
 export const AuthInterceptorProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

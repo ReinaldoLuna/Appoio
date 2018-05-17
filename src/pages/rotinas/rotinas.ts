@@ -17,6 +17,7 @@ export class RotinasPage {
 
   crianca_id = this.navParams.get("crianca_id");
   crianca_nome = this.navParams.get("crianca_nome");
+  usuario_id = this.navParams.get("usuario_id");
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +32,6 @@ export class RotinasPage {
 
   loadData() {
     let loader = this.presentLoading();
-    console.log(this.crianca_id)
     this.rotinaService.findByCrianca(this.crianca_nome, this.page, 10)
       .subscribe(response => {
         this.rotinas = this.rotinas.concat(response['content']);
@@ -41,8 +41,8 @@ export class RotinasPage {
       })
   }
 
-  addRotina(crianca_id: string, crianca_nome: string) {
-    this.navCtrl.setRoot('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, });
+  addRotina(crianca_id: string, crianca_nome: string, usuario_id:string) {
+    this.navCtrl.setRoot('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, usuario_id: this.usuario_id });
   }
   showDetail(rotina_id: string) {
     this.navCtrl.push('RotinaDetailPage', { rotina_id: rotina_id });

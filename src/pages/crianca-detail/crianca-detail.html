@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalher</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-avatar>
+    <img class="circle" [src]="crianca?.imageUrl || 'assets/imgs/avatar-blank.png'">
+  </ion-avatar>
+
+  <h2 text-center>{{ crianca?.nome }}</h2>
+  <p text-center>{{ crianca?.dataNascimento }}</p>
+  <p text-center>{{ crianca?.colegio }}</p>
+
+  <ion-list>
+    <ion-item  *ngFor="let usuario of usuarios">
+      <ion-thumbnail item-start>
+        <img [src]="crianca?.imageUrl || 'assets/imgs/avatar-blank.png'">
+      </ion-thumbnail>
+      <h2>{{ usuario.nome }}</h2>
+      <button ion-button clear item-end><ion-icon name="trash"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+
+
+  <button ion-button block (click)="editCrianca(crianca.id)">Editar Crianca</button>
+
+</ion-content>

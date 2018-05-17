@@ -14,6 +14,7 @@ export class CadastroRotinaPage {
 
   crianca_id = this.navParams.get("crianca_id");
   crianca_nome = this.navParams.get("crianca_nome");
+  usuario_id = this.navParams.get("usuario_id");
 
   setData() {
 
@@ -33,9 +34,9 @@ export class CadastroRotinaPage {
       crianca: [{ "id": this.crianca_id }, [Validators.required]],
       dataCriacao: [this.setData(), [Validators.required]],
       data: [this.setData(), [Validators.required]],
-      atividades: ['Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet'],
-      obs: ['teste'],
-      tipo: [1, [Validators.required]],
+      atividades: [''],
+      obs: [''],
+      tipo: [this.usuario_id<3 ? 0 : 1, [Validators.required]],
       comportamento: [2, [Validators.required]],
       interacao: [2, [Validators.required]],
       humor: [2, [Validators.required]],
@@ -45,13 +46,16 @@ export class CadastroRotinaPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.setData());  }
+    
+   }
 
   novaRotina() {
+
     this.rotinaService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk()
       }, error => { })
+
 
   }
 

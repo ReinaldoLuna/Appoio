@@ -17,11 +17,12 @@
       </ion-refresher>
   <ion-list>
     
-    <button ion-item *ngFor="let crianca of criancas" (click)="showRotinas(crianca.nome, crianca.id)">
+    <button ion-item *ngFor="let crianca of criancas" (click)="showRotinas(crianca.nome, crianca.id, usuario.id)">
       <ion-thumbnail item-start>
-        <img class="avatar-crianca" src="{{ bucketUrl }}/crianca_id{{crianca.id}}.jpg">
+        <img class="avatar-crianca" [src]="crianca.imageUrl || 'assets/imgs/avatar-blank.png'">
       </ion-thumbnail>
       <h2>{{ crianca?.nome }}</h2>
+      <p>{{ crianca.colegio }}</p>
     </button>
   </ion-list>
 

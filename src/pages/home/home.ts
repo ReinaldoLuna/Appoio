@@ -41,15 +41,26 @@ export class HomePage {
         loader.dismiss();
         this.criancaService.findByUser(this.usuario.id)
           .subscribe(response => {
-            this.criancas = response
+            this.criancas = response;
+            this.loadImgageUrls()
           }, error => {
             loader.dismiss();
           })
       })
   }
 
-  showRotinas( crianca_nome: string, crianca_id: string) {
-    this.navCtrl.push('RotinasPage', { crianca_nome: crianca_nome, crianca_id: crianca_id })
+loadImgageUrls(){
+  for(var i = 0; i<this.criancas.length; i++){
+    let crianca = this.criancas[i];
+    this.criancaService.getImageFromBucket(crianca.id)
+    .subscribe( response => {
+      crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${crianca.id}.jpg`;
+    }, error => { })
+  }
+}
+
+  showRotinas( crianca_nome: string, crianca_id: string, usuario_id: string) {
+    this.navCtrl.push('RotinasPage', { crianca_nome: crianca_nome, crianca_id: crianca_id, usuario_id: usuario_id })
   }
 
   presentLoading() {
