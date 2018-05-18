@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { CriancaService } from '../../services/domain/crianca.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CriancaDTO } from '../../models/crianca.dto';
-import { UsuarioDTO } from '../../models/usuario.dto';
 
 @IonicPage()
 @Component({
@@ -28,35 +27,32 @@ export class EditCriancaPage {
     public alertCtrl: AlertController) {
 
     let crianca: CriancaDTO = this.navParams.get('crianca_obj')
-    let usuario = crianca.usuarios[0].id;
+    let usuarios = crianca.usuarios;
+
 
     this.formGroup = this.formBuilder.group({
       nome: [crianca.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
       colegio: [crianca.colegio, [Validators.required]],
       foto: ['teste.jpg', [Validators.required]],
       dataNascimento: ['', Validators.required],
+      sexo: [crianca.sexo, Validators.required],
       categoriaTea: [crianca.categoriaTea, [Validators.required]],
+      usuarios: [usuarios, [Validators.required]],
       recomendacoesMedicas: [[{ "observacoes": "Teste" }], [Validators.required]],
-      usuarios: [[{ "id": 2 },{"id": usuario}]]
     });
   }
 
   crianca_id = this.navParams.get('crianca_id')
 
   ionViewDidLoad() {
-    this.formGroup.value.nome = "novo nome"
   }
 
   editCrianca() {
     this.formatData();
-    //this.formGroup.value.usuarios = [{ "id": this.usuario.id }]
-
     this.criancaService.updateCrianca(this.formGroup.value, this.crianca_id)
       .subscribe(response => {
         this.showEditOk()
       }, error => { })
-
-
   }
 
   showEditOk() {

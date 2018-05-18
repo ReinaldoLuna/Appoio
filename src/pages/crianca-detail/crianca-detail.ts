@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { CriancaService } from '../../services/domain/crianca.service';
 import { CriancaDTO } from '../../models/crianca.dto';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { API_CONFIG } from '../../config/api.config';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 @IonicPage()
 @Component({
@@ -24,7 +25,9 @@ export class CriancaDetailPage {
     public navParams: NavParams,
     public criancaService: CriancaService,
     public camera: Camera,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public usuarioService: UsuarioService,
+    public alertCtrl: AlertController
   ) {
   }
 
@@ -43,6 +46,54 @@ export class CriancaDetailPage {
 
   editCrianca(crianca_id: string, crianca_obj: CriancaDTO) {
     this.navCtrl.setRoot('EditCriancaPage', { crianca_id: this.crianca.id, crianca_obj: this.crianca })
+  }
+
+  deleteUserFromChild(usuario_id: string) {
+
+    let crianca_id = this.navParams.get('crianca_id');
+
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (this.usuarios[i].id == usuario_id) {
+        this.usuarios.splice(i, 1);
+        this.crianca.usuarios = this.usuarios;
+      }
+    }
+
+    this.criancaService.updateCrianca(this.crianca, crianca_id)
+      .subscribe(response => {
+        this.getCrianca();
+      })
+    console.log(this.crianca)
+  }
+
+  addNewUser(usuario_email: string) {
+
+
+    let crianca_id = this.navParams.get('crianca_id');
+
+    this.usuarioService.findByEmail(usuario_email)
+      .subscribe(response => {
+        this.usuarios.push(response);
+        this.criancaService.updateCrianca(this.crianca, crianca_id)
+          .subscribe(response => {
+            this.getCrianca()
+          })
+      })
+    console.log(usuario_email)
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: "Sucesso!",
+      message: "Cadastro realizado",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Ok",
+        }
+      ]
+    });
+    alert.present();
   }
 
   getImageIfExists() {

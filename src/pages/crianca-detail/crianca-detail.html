@@ -16,6 +16,18 @@
   <h2 text-center>{{ crianca?.nome }}</h2>
   <p text-center>{{ crianca?.dataNascimento }}</p>
   <p text-center>{{ crianca?.colegio }}</p>
+  <ion-item>
+    <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
+    <button *ngIf="picture" ion-button outline (click)="sendPicture()">Salvar imagem</button>
+    <button *ngIf="picture" ion-button outline (click)="cancel()">Cancelar</button>
+  </ion-item>
+
+
+  <ion-label stacked>Novo Usuário</ion-label>
+  <ion-item>
+    <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+    <button ion-button round clear item-right (click)="addNewUser(email)"><ion-icon name="add"></ion-icon></button>
+   </ion-item>
 
   <ion-list>
     <ion-item  *ngFor="let usuario of usuarios">
@@ -23,7 +35,7 @@
         <img [src]="crianca?.imageUrl || 'assets/imgs/avatar-blank.png'">
       </ion-thumbnail>
       <h2>{{ usuario.nome }}</h2>
-      <button ion-button clear item-end><ion-icon name="trash"></ion-icon></button>
+      <button ion-button clear item-end (click)="deleteUserFromChild(usuario.id)"><ion-icon name="trash"></ion-icon></button>
     </ion-item>
   </ion-list>
 
