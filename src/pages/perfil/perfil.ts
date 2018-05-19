@@ -64,12 +64,12 @@ export class PerfilPage {
     }
   }
 
-  getImageIfExists() {
-    this.usuarioService.getImageFromBucket(this.usuario.id)
-      .subscribe(respose => {
-        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
-      }, error => { })
-  }
+getImageIfExists() {
+  this.usuarioService.getImageFromBucket(this.usuario.id)
+    .subscribe(respose => {
+      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
+    }, error => { })
+}
 
 
 loadImgageUrls(){

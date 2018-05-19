@@ -38,6 +38,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.handle403();
                         break;
 
+                    case 404:
+                        this.handle404();
+                        break;
+
                     case 422:
                         this.handle422(errorObj);
                         break;
@@ -50,6 +54,21 @@ export class ErrorInterceptor implements HttpInterceptor {
                 return Observable.throw(errorObj)
             }) as any
     }
+
+    handle404() {
+        let alert = this.alertCtrl.create({
+            title: "Usuário não encontrado!",
+            message: "Verifique o email e tente novamente",
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: "Ok"
+                }
+            ]
+        });
+        alert.present();
+    }
+
 
     handle401() {
         let alert = this.alertCtrl.create({
@@ -98,12 +117,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     private listErrors(messages: FieldMessage[]): string {
-        
-        let s : string  = '';
-        for(var i=0; i < messages.length; i++){
+
+        let s: string = '';
+        for (var i = 0; i < messages.length; i++) {
             s = s + '<p> <strong>' + messages[i].fieldName + '</strong>: </p>' + messages[i].message + '<p>'
         }
-        
+
         return s;
     }
 }

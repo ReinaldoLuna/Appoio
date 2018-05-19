@@ -4,6 +4,10 @@ page-perfil {
         border-radius: 100%;
         margin: 25px auto 0 auto;
     }
+    ion-thumbnail{
+        border-radius: 50%;
+        overflow: hidden;
+    }
     cordova-camera-capture{
         position: absolute!important;
         bottom: 0;

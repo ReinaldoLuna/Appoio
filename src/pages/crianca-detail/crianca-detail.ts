@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { CriancaService } from '../../services/domain/crianca.service';
 import { CriancaDTO } from '../../models/crianca.dto';
-import { UsuarioDTO } from '../../models/usuario.dto';
 import { API_CONFIG } from '../../config/api.config';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UsuarioService } from '../../services/domain/usuario.service';
@@ -49,7 +48,6 @@ export class CriancaDetailPage {
   }
 
   deleteUserFromChild(usuario_id: string) {
-
     let crianca_id = this.navParams.get('crianca_id');
 
     for (var i = 0; i < this.usuarios.length; i++) {
@@ -62,13 +60,12 @@ export class CriancaDetailPage {
     this.criancaService.updateCrianca(this.crianca, crianca_id)
       .subscribe(response => {
         this.getCrianca();
+        this.showDeleteUserOk()
       })
     console.log(this.crianca)
   }
 
   addNewUser(usuario_email: string) {
-
-
     let crianca_id = this.navParams.get('crianca_id');
 
     this.usuarioService.findByEmail(usuario_email)
@@ -76,24 +73,14 @@ export class CriancaDetailPage {
         this.usuarios.push(response);
         this.criancaService.updateCrianca(this.crianca, crianca_id)
           .subscribe(response => {
+            this.showInsertUserOk();
             this.getCrianca()
-          })
-      })
-    console.log(usuario_email)
-  }
+          }, error => {
 
-  showInsertOk() {
-    let alert = this.alertCtrl.create({
-      title: "Sucesso!",
-      message: "Cadastro realizado",
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: "Ok",
-        }
-      ]
-    });
-    alert.present();
+          });
+      }, error => {
+        
+      });
   }
 
   getImageIfExists() {
@@ -142,4 +129,31 @@ export class CriancaDetailPage {
     this.picture = null;
   }
 
+  showInsertUserOk() {
+    let alert = this.alertCtrl.create({
+      title: "Sucesso!",
+      message: "Novo usuário associado com sucesso",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Ok",
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showDeleteUserOk(){
+    let alert = this.alertCtrl.create({
+      title: "Sucesso!",
+      message: "Usuário removido",
+      enableBackdropDismiss: true,
+      buttons: [
+        {
+          text: "Ok",
+        }
+      ]
+    });
+    alert.present();
+  }
 }
