@@ -5,6 +5,7 @@ import { CriancaDTO } from '../../models/crianca.dto';
 import { API_CONFIG } from '../../config/api.config';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { RecomendacoesService } from '../../services/domain/recomendacoes.service';
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ export class CriancaDetailPage {
 
   crianca: CriancaDTO;
   usuarios;
+  recomendacoes;
   picture: string;
   cameraOn: boolean = false;
 
@@ -26,30 +28,32 @@ export class CriancaDetailPage {
     public camera: Camera,
     public loadingCtrl: LoadingController,
     public usuarioService: UsuarioService,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public recomendacoesService: RecomendacoesService
   ) {
   }
 
+  crianca_id = this.navParams.get('crianca_id');
+
   ionViewDidLoad() {
     this.getCrianca()
+    this.getRecomendacoes()
   }
 
   getCrianca() {
-    let crianca_id = this.navParams.get('crianca_id');
-    return this.criancaService.findById(crianca_id)
+    return this.criancaService.findById(this.crianca_id)
       .subscribe(response => {
         this.crianca = response;
         this.usuarios = this.crianca.usuarios;
+        this.recomendacoes = this.crianca.recomendacoesMedicas;
       }, error => { })
   }
 
   editCrianca(crianca_id: string, crianca_obj: CriancaDTO) {
-    this.navCtrl.setRoot('EditCriancaPage', { crianca_id: this.crianca.id, crianca_obj: this.crianca })
+    this.navCtrl.push('EditCriancaPage', { crianca_id: this.crianca.id, crianca_obj: this.crianca })
   }
 
   deleteUserFromChild(usuario_id: string) {
-    let crianca_id = this.navParams.get('crianca_id');
-
     for (var i = 0; i < this.usuarios.length; i++) {
       if (this.usuarios[i].id == usuario_id) {
         this.usuarios.splice(i, 1);
@@ -57,21 +61,18 @@ export class CriancaDetailPage {
       }
     }
 
-    this.criancaService.updateCrianca(this.crianca, crianca_id)
+    this.criancaService.updateCrianca(this.crianca, this.crianca_id)
       .subscribe(response => {
         this.getCrianca();
         this.showDeleteUserOk()
       })
-    console.log(this.crianca)
   }
 
   addNewUser(usuario_email: string) {
-    let crianca_id = this.navParams.get('crianca_id');
-
     this.usuarioService.findByEmail(usuario_email)
       .subscribe(response => {
         this.usuarios.push(response);
-        this.criancaService.updateCrianca(this.crianca, crianca_id)
+        this.criancaService.updateCrianca(this.crianca, this.crianca_id)
           .subscribe(response => {
             this.showInsertUserOk();
             this.getCrianca()
@@ -79,8 +80,23 @@ export class CriancaDetailPage {
 
           });
       }, error => {
-        
+
       });
+  }
+
+  getRecomendacoes() {
+    this.recomendacoesService.findByCrianca(this.crianca_id)
+      .subscribe(response => {
+        this.recomendacoes = response;
+      })
+  }
+
+  addRecomendacao(crianca_id: string){
+    this.navCtrl.push('CadastroRecomendacaoPage', { crianca_id: crianca_id })
+  }
+
+  showDetail(recomendacao_id: string) {
+    this.navCtrl.push('RecomendacaoDetailPage', { recomendacao_id: recomendacao_id });
   }
 
   getImageIfExists() {
@@ -91,7 +107,6 @@ export class CriancaDetailPage {
   }
 
   getCameraPicture() {
-
     this.cameraOn = true;
 
     const options: CameraOptions = {
@@ -143,7 +158,7 @@ export class CriancaDetailPage {
     alert.present();
   }
 
-  showDeleteUserOk(){
+  showDeleteUserOk() {
     let alert = this.alertCtrl.create({
       title: "Sucesso!",
       message: "Usuário removido",
@@ -155,5 +170,26 @@ export class CriancaDetailPage {
       ]
     });
     alert.present();
+  }
+
+  confirmDelete(id_usuario: string){
+    let confirm = this.alertCtrl.create({
+      title: 'Remover usuário?',
+      message: 'Você tem certeza que deseja remover este usuário?',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancelar',
+
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.deleteUserFromChild(id_usuario)
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

@@ -26,19 +26,33 @@
   <ion-label stacked>Novo Usuário</ion-label>
   <ion-item>
     <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
-    <button ion-button round clear item-right (click)="addNewUser(email)"><ion-icon name="add"></ion-icon></button>
-   </ion-item>
+    <button ion-button round clear item-right (click)="addNewUser(email)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-item>
 
   <ion-list>
-    <ion-item  *ngFor="let usuario of usuarios">
+    <ion-item *ngFor="let usuario of usuarios">
       <ion-thumbnail item-start>
         <img [src]="crianca?.imageUrl || 'assets/imgs/avatar-blank.png'">
       </ion-thumbnail>
       <h2>{{ usuario.nome }}</h2>
-      <button ion-button clear item-end (click)="deleteUserFromChild(usuario.id)"><ion-icon name="trash"></ion-icon></button>
+      <button ion-button clear item-end (click)="confirmDelete(usuario.id)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 
+  <ion-list no-lines>
+    <button ion-item *ngFor="let recomendacao of recomendacoes" (click)="showDetail(recomendacao.id)">
+      <h2>{{ recomendacao?.observacao}}</h2>
+      <p>
+        <small>Cadastrado por {{ recomendacao?.usuario.nome }}</small>
+      </p>
+    </button>
+
+    <button ion-button outline block (click)="addRecomendacao(crianca.id)">Nova Recomendação Médica</button>
+  </ion-list>
 
   <button ion-button block (click)="editCrianca(crianca.id)">Editar Crianca</button>
 

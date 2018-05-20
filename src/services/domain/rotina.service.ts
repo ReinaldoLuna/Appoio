@@ -17,6 +17,7 @@ export class RotinaService {
     findByCrianca(crianca_nome: string, page: number = 0,linesPerPage: number = 24 ) {
         return this.http.get(`${API_CONFIG.baseUrl}/rotinas/page/?nome_crianca=${crianca_nome}&page=${page}&linesPerPage=${linesPerPage}&direction=DESC`)
     }
+
     insert(obj: RotinaDTO) {
         return this.http.post(
             `${API_CONFIG.baseUrl}/rotinas/`,
@@ -26,5 +27,9 @@ export class RotinaService {
                 responseType: "text"
             }
         )
+    }
+
+    delete(rotina_id: string){
+        return this.http.delete(`${API_CONFIG.baseUrl}/rotinas/${rotina_id}`)
     }
 }

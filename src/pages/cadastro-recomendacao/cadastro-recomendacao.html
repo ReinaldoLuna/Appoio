@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nova Recomendação médica</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<h2>Observação</h2>
+
+<form [formGroup]="formGroup" (ngSubmit)="novaRecomendacao(); $event.preventDefault()">
+  <textarea formControlName="observacao"></textarea>
+  <button ion-button block>Salvar</button>
+</form>
+
+</ion-content>

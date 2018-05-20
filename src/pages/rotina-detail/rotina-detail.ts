@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { RotinaDTO } from '../../models/rotina.dto';
 import { RotinaService } from '../../services/domain/rotina.service';
 
@@ -16,19 +16,49 @@ export class RotinaDetailPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public rotinaService: RotinaService) {
+    public rotinaService: RotinaService,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
 
-let rotina_id = this.navParams.get('rotina_id');
+    let rotina_id = this.navParams.get('rotina_id');
 
     this.rotinaService.findById(rotina_id)
-    .subscribe(response => {
-      this.rotina = response;
-    }, error => {
+      .subscribe(response => {
+        this.rotina = response;
+        console.log(this.rotina.id)
+      }, error => {
 
-    })
+      })
+  }
+
+  deleteRotina(rotina_id: string) {
+    this.rotinaService.delete(rotina_id)
+      .subscribe(response => {
+        this.navCtrl.pop()
+      })
+  }
+
+  confirmDelete(id_rotina: string) {
+    let confirm = this.alertCtrl.create({
+      title: 'Apagar rotina',
+      message: 'Você tem certeza que deseja apagar esta rotina?',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancelar',
+
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.deleteRotina(id_rotina)
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

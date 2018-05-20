@@ -2,8 +2,12 @@
 
   <ion-navbar>
     <ion-title>Detalhes da Rotina</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="confirmDelete(rotina?.id)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 

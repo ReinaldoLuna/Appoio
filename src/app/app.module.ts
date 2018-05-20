@@ -16,6 +16,7 @@ import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { CriancaService } from '../services/domain/crianca.service';
 import { ImageUtilService } from '../services/image-util.service';
+import { RecomendacoesService } from '../services/domain/recomendacoes.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ImageUtilService } from '../services/image-util.service';
     CriancaService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
-    ImageUtilService
+    ImageUtilService,
+    RecomendacoesService
   ]
 })
 export class AppModule {}

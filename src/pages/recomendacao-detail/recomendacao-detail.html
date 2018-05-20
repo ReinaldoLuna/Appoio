@@ -1,0 +1,19 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recomendação médica</ion-title>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="confirmDelete(recomendacao.id)">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <p>{{ recomendacao?.observacao }}</p>
+
+</ion-content>

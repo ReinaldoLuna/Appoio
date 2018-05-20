@@ -42,8 +42,9 @@ export class RotinasPage {
   }
 
   addRotina(crianca_id: string, crianca_nome: string, usuario_id:string) {
-    this.navCtrl.setRoot('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, usuario_id: this.usuario_id });
+    this.navCtrl.push('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, usuario_id: this.usuario_id });
   }
+  
   showDetail(rotina_id: string) {
     this.navCtrl.push('RotinaDetailPage', { rotina_id: rotina_id });
   }
