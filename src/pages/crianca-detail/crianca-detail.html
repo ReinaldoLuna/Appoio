@@ -50,8 +50,8 @@
         <small>Cadastrado por {{ recomendacao?.usuario.nome }}</small>
       </p>
     </button>
-
-    <button ion-button outline block (click)="addRecomendacao(crianca.id)">Nova Recomendação Médica</button>
+  
+    <button *ngIf="medico" ion-button outline block (click)="addRecomendacao(crianca.id)">Nova Recomendação Médica</button>
   </ion-list>
 
   <button ion-button block (click)="editCrianca(crianca.id)">Editar Crianca</button>

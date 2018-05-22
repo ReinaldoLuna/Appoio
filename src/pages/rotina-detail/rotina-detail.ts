@@ -27,7 +27,6 @@ export class RotinaDetailPage {
     this.rotinaService.findById(rotina_id)
       .subscribe(response => {
         this.rotina = response;
-        console.log(this.rotina.id)
       }, error => {
 
       })

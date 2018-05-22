@@ -82,23 +82,23 @@ loadImgageUrls(){
   }
 }
 
-  getCameraPicture() {
+getCameraPicture() {
 
-    this.cameraOn = true;
+  this.cameraOn = true;
 
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      this.picture = 'data:image/png;base64,' + imageData;
-      this.cameraOn = false;
-    }, (err) => {
-    });
+  const options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.PNG,
+    mediaType: this.camera.MediaType.PICTURE
   }
+
+  this.camera.getPicture(options).then((imageData) => {
+    this.picture = 'data:image/png;base64,' + imageData;
+    this.cameraOn = false;
+  }, (err) => {
+  });
+}
 
   presentLoading() {
     let loader = this.loadingCtrl.create({
@@ -121,8 +121,8 @@ loadImgageUrls(){
     this.picture = null;
   }
 
-  showDetail(crianca_id: string) {
-    this.navCtrl.push('CriancaDetailPage', { crianca_id: crianca_id })
+  showDetail(crianca_id: string, usuario_tipo: string) {
+    this.navCtrl.push('CriancaDetailPage', { crianca_id: crianca_id, usuario_tipo: this.usuario.tipo })
   }
 
 }

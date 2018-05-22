@@ -24,7 +24,7 @@ export class CadastroRecomendacaoPage {
     public usuarioService: UsuarioService,
     public recomendacaoService: RecomendacoesService) {
     this.formGroup = this.formBuilder.group({
-      observacao: ['Teste', [Validators.required]],
+      observacao: ['', [Validators.required]],
       usuario: ['', [Validators.required]],
       crianca: ['', [Validators.required]]
     })

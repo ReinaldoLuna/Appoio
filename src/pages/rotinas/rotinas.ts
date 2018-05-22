@@ -18,12 +18,13 @@ export class RotinasPage {
   crianca_id = this.navParams.get("crianca_id");
   crianca_nome = this.navParams.get("crianca_nome");
   usuario_id = this.navParams.get("usuario_id");
+  usuario_tipo = this.navParams.get("usuario_tipo");
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public rotinaService: RotinaService,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,) {
   }
 
   ionViewDidLoad() {
@@ -41,8 +42,8 @@ export class RotinasPage {
       })
   }
 
-  addRotina(crianca_id: string, crianca_nome: string, usuario_id:string) {
-    this.navCtrl.push('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, usuario_id: this.usuario_id });
+  addRotina(crianca_id: string, crianca_nome: string, usuario_id:string, usuario_tipo: string) {
+    this.navCtrl.push('CadastroRotinaPage', { crianca_nome: this.crianca_nome, crianca_id: crianca_id, usuario_id: this.usuario_id, usuario_tipo: this.usuario_tipo });
   }
   
   showDetail(rotina_id: string) {

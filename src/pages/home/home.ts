@@ -49,18 +49,18 @@ export class HomePage {
       })
   }
 
-loadImgageUrls(){
-  for(var i = 0; i<this.criancas.length; i++){
-    let crianca = this.criancas[i];
-    this.criancaService.getImageFromBucket(crianca.id)
-    .subscribe( response => {
-      crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${crianca.id}.jpg`;
-    }, error => { })
+  loadImgageUrls() {
+    for (var i = 0; i < this.criancas.length; i++) {
+      let crianca = this.criancas[i];
+      this.criancaService.getImageFromBucket(crianca.id)
+        .subscribe(response => {
+          crianca.imageUrl = `${API_CONFIG.bucketBaseUrl}/crianca_id${crianca.id}.jpg`;
+        }, error => { })
+    }
   }
-}
 
-  showRotinas( crianca_nome: string, crianca_id: string, usuario_id: string) {
-    this.navCtrl.push('RotinasPage', { crianca_nome: crianca_nome, crianca_id: crianca_id, usuario_id: usuario_id })
+  showRotinas(crianca_nome: string, crianca_id: string, usuario_id: string, usuario_tipo: string) {
+    this.navCtrl.push('RotinasPage', { crianca_nome: crianca_nome, crianca_id: crianca_id, usuario_id: usuario_id, usuario_tipo: this.usuario.tipo})
   }
 
   presentLoading() {

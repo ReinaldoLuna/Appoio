@@ -24,12 +24,6 @@
     <p *ngIf="formGroup.controls.colegio.dirty && formGroup.controls.colegio.errors" margin-left> Email inválido</p>
 
     <ion-item>
-      <ion-label stacked>Foto</ion-label>
-      <ion-input formControlName="foto" type="text"></ion-input>
-    </ion-item>
-    <p *ngIf="formGroup.controls.foto.dirty && formGroup.controls.foto.errors" margin-left> Email inválido</p>
-
-    <ion-item>
       <ion-label>Data de Nascimento</ion-label>
       <ion-datetime formControlName="dataNascimento" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
     </ion-item>

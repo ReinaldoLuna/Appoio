@@ -35,9 +35,8 @@ export class CadastroCriancaPage {
     public usuarioService: UsuarioService, ) {
 
     this.formGroup = this.formBuilder.group({
-      nome: ['Juscelino', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      colegio: ['Granbery', [Validators.required]],
-      foto: ['teste.jpg', [Validators.required]],
+      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      colegio: ['', [Validators.required]],
       dataNascimento: ['', Validators.required],
       sexo: [0, [Validators.required]],
       categoriaTea: [0, [Validators.required]],

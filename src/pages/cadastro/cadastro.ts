@@ -21,13 +21,12 @@ export class CadastroPage {
     public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuilder.group({
-      nome: ['Teste', [Validators.required]],
-      email: ['teste', [Validators.required]],
-      senha: ['12345678', [Validators.required, Validators.minLength(8)]],
-      telefone: ['32323232323', [Validators.required]],
+      nome: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      senha: ['', [Validators.required, Validators.minLength(8)]],
+      telefone: ['', [Validators.required]],
       foto: [''],
-      tipo: ['2', [Validators.required]],
-
+      tipo: ['Mae', [Validators.required]],
     });
   }
 

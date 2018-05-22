@@ -19,7 +19,7 @@
   <ion-list>
     <button ion-item *ngFor="let rotina of rotinas" (click)="showDetail(rotina.id)">
       <h2>{{ rotina.data }}</h2>
-      <h3>Por: {{ rotina.tipo }}</h3>
+      <h3>Por: {{ rotina.usuario.nome }}</h3>
     </button>
   </ion-list>
 

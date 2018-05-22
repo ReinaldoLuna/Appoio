@@ -34,10 +34,24 @@ export class CriancaDetailPage {
   }
 
   crianca_id = this.navParams.get('crianca_id');
+  usuario_tipo = this.navParams.get('usuario_tipo');
+
+  medico: boolean;
+
+  isMedico(tipo_usuario) {
+    if ((tipo_usuario == "PSICOLOGO") || (tipo_usuario == "PSIQUIATRA") || (tipo_usuario == "PEDIATRA")) {
+      this.medico = true;
+    } else {
+      this.medico = false;
+    }
+  }
+
+
 
   ionViewDidLoad() {
     this.getCrianca()
     this.getRecomendacoes()
+    this.isMedico(this.usuario_tipo)
   }
 
   getCrianca() {
@@ -91,7 +105,7 @@ export class CriancaDetailPage {
       })
   }
 
-  addRecomendacao(crianca_id: string){
+  addRecomendacao(crianca_id: string) {
     this.navCtrl.push('CadastroRecomendacaoPage', { crianca_id: crianca_id })
   }
 
@@ -172,7 +186,7 @@ export class CriancaDetailPage {
     alert.present();
   }
 
-  confirmDelete(id_usuario: string){
+  confirmDelete(id_usuario: string) {
     let confirm = this.alertCtrl.create({
       title: 'Remover usuário?',
       message: 'Você tem certeza que deseja remover este usuário?',

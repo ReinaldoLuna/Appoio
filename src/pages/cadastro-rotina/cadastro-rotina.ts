@@ -23,6 +23,15 @@ export class CadastroRotinaPage {
     return data;
   }
 
+  setTipoRotina(usuario_tipo) {
+    if ((usuario_tipo == "MAE") || (usuario_tipo == "PAI") || (usuario_tipo == "RESPONSAVEL")) {
+      return true
+    } else {
+      return false;
+    }
+  }
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,13 +39,16 @@ export class CadastroRotinaPage {
     public alertCtrl: AlertController,
     public rotinaService: RotinaService) {
 
+    let usuario_tipo = this.navParams.get("usuario_tipo")
+
     this.formGroup = this.formBuilder.group({
       crianca: [{ "id": this.crianca_id }, [Validators.required]],
+      usuario: [{"id": this.usuario_id}],
       dataCriacao: [this.setData(), [Validators.required]],
       data: [this.setData(), [Validators.required]],
       atividades: [''],
       obs: [''],
-      tipo: [this.usuario_id<3 ? 0 : 1, [Validators.required]],
+      tipo: [this.setTipoRotina(usuario_tipo) ? "CASA" : "ESCOLA", [Validators.required]],
       comportamento: [2, [Validators.required]],
       interacao: [2, [Validators.required]],
       humor: [2, [Validators.required]],
@@ -46,8 +58,8 @@ export class CadastroRotinaPage {
   }
 
   ionViewDidLoad() {
-    
-   }
+
+  }
 
   novaRotina() {
 
