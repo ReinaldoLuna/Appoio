@@ -31,12 +31,10 @@ export class RecomendacaoDetailPage {
     return this.recomendacaoService.findById(this.recomendacao_id)
       .subscribe(response => {
         this.recomendacao = response
-        console.log(this.recomendacao)
       }, error => {
 
       })
   }
-
 
   deleteRecomendacao(id_recomendacao: string){
     this.recomendacaoService.deleteById(this.recomendacao_id)

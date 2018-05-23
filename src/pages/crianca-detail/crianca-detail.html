@@ -38,7 +38,7 @@
       </ion-thumbnail>
       <h2>{{ usuario.nome }}</h2>
       <button ion-button clear item-end (click)="confirmDelete(usuario.id)">
-        <ion-icon name="trash"></ion-icon>
+        <ion-icon *ngIf="delete_usuario" name="trash"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

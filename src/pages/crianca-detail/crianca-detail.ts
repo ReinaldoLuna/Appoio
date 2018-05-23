@@ -37,6 +37,7 @@ export class CriancaDetailPage {
   usuario_tipo = this.navParams.get('usuario_tipo');
 
   medico: boolean;
+  delete_usuario: boolean = true;
 
   isMedico(tipo_usuario) {
     if ((tipo_usuario == "PSICOLOGO") || (tipo_usuario == "PSIQUIATRA") || (tipo_usuario == "PEDIATRA")) {
@@ -45,8 +46,6 @@ export class CriancaDetailPage {
       this.medico = false;
     }
   }
-
-
 
   ionViewDidLoad() {
     this.getCrianca()
@@ -60,6 +59,11 @@ export class CriancaDetailPage {
         this.crianca = response;
         this.usuarios = this.crianca.usuarios;
         this.recomendacoes = this.crianca.recomendacoesMedicas;
+        if (this.usuarios.length < 2) {
+          this.delete_usuario = false
+        } else {
+          this.delete_usuario = true
+        }
       }, error => { })
   }
 
