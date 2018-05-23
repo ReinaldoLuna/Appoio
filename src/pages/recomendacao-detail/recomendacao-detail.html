@@ -5,7 +5,7 @@
     <ion-title>Recomendação médica</ion-title>
   <ion-buttons end>
     <button ion-button icon-only (click)="confirmDelete(recomendacao.id)">
-      <ion-icon name="trash"></ion-icon>
+      <ion-icon *ngIf="tipo_medico" name="trash"></ion-icon>
     </button>
   </ion-buttons>
   </ion-navbar>

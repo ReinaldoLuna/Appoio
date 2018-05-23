@@ -20,6 +20,7 @@ export class RecomendacaoDetailPage {
   }
 
   recomendacao_id = this.navParams.get('recomendacao_id');
+  tipo_medico = this.navParams.get('tipo_medico');
 
 
   ionViewDidLoad() {
@@ -30,12 +31,10 @@ export class RecomendacaoDetailPage {
     return this.recomendacaoService.findById(this.recomendacao_id)
       .subscribe(response => {
         this.recomendacao = response
-        console.log(this.recomendacao)
       }, error => {
 
       })
   }
-
 
   deleteRecomendacao(id_recomendacao: string){
     this.recomendacaoService.deleteById(this.recomendacao_id)
