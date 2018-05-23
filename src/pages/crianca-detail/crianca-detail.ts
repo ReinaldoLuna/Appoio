@@ -109,8 +109,8 @@ export class CriancaDetailPage {
     this.navCtrl.push('CadastroRecomendacaoPage', { crianca_id: crianca_id })
   }
 
-  showDetail(recomendacao_id: string) {
-    this.navCtrl.push('RecomendacaoDetailPage', { recomendacao_id: recomendacao_id });
+  showDetail(recomendacao_id: string, tipo_medico: boolean) {
+    this.navCtrl.push('RecomendacaoDetailPage', { recomendacao_id: recomendacao_id, tipo_medico: this.medico });
   }
 
   getImageIfExists() {

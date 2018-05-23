@@ -20,6 +20,7 @@ export class RecomendacaoDetailPage {
   }
 
   recomendacao_id = this.navParams.get('recomendacao_id');
+  tipo_medico = this.navParams.get('tipo_medico');
 
 
   ionViewDidLoad() {
