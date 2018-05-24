@@ -35,7 +35,7 @@ export class RotinaDetailPage {
   deleteRotina(rotina_id: string) {
     this.rotinaService.delete(rotina_id)
       .subscribe(response => {
-        this.navCtrl.pop()
+        this.navCtrl.setRoot("HomePage")
       })
   }
 

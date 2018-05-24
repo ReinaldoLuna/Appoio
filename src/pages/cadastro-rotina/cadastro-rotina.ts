@@ -67,8 +67,6 @@ export class CadastroRotinaPage {
       .subscribe(response => {
         this.showInsertOk()
       }, error => { })
-
-
   }
 
   showInsertOk() {
