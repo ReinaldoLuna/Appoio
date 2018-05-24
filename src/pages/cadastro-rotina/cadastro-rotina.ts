@@ -78,7 +78,8 @@ export class CadastroRotinaPage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.setRoot('RotinasPage', { crianca_id: this.crianca_id, crianca_nome: this.crianca_nome });
+            this.navCtrl.setRoot("HomePage");
+            //this.navCtrl.setRoot('RotinasPage', { crianca_id: this.crianca_id, crianca_nome: this.crianca_nome });
           }
         }
       ]
