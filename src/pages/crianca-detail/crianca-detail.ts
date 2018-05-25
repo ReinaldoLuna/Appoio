@@ -59,12 +59,32 @@ export class CriancaDetailPage {
         this.crianca = response;
         this.usuarios = this.crianca.usuarios;
         this.recomendacoes = this.crianca.recomendacoesMedicas;
+        this.getImageIfExists();
+        this.loadImgageUrls();
         if (this.usuarios.length < 2) {
           this.delete_usuario = false
         } else {
           this.delete_usuario = true
         }
       }, error => { })
+  }
+
+  getImageIfExists() {
+    this.criancaService.getImageFromBucket(this.crianca.id)
+      .subscribe(respose => {
+        this.crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${this.crianca.id}.jpg`;
+      }, error => { })
+  }
+
+  loadImgageUrls(){
+    console.log(this.usuarios)
+    for(var i = 0; i<this.usuarios.length; i++){
+      let usuario = this.usuarios[i];
+      this.usuarioService.getImageFromBucket(usuario.id)
+      .subscribe( response => {
+        usuario.imageUrl = `${ API_CONFIG.bucketBaseUrl }/usuario_id${usuario.id}.jpg`;
+      }, error => { })
+    }
   }
 
   editCrianca(crianca_id: string, crianca_obj: CriancaDTO) {
@@ -115,13 +135,6 @@ export class CriancaDetailPage {
 
   showDetail(recomendacao_id: string, tipo_medico: boolean) {
     this.navCtrl.push('RecomendacaoDetailPage', { recomendacao_id: recomendacao_id, tipo_medico: this.medico });
-  }
-
-  getImageIfExists() {
-    this.criancaService.getImageFromBucket(this.crianca.id)
-      .subscribe(respose => {
-        this.crianca.imageUrl = `${API_CONFIG.bucketBaseUrl}/crianca_id${this.crianca.id}.jpg`
-      }, error => { })
   }
 
   getCameraPicture() {

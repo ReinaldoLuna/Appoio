@@ -19,4 +19,9 @@ page-crianca-detail {
     #disabled{
      display: none;
     }
+
+    ion-thumbnail {
+        overflow: hidden;
+        border-radius: 50%;
+    }
 }

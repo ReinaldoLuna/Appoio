@@ -34,7 +34,7 @@
   <ion-list>
     <ion-item *ngFor="let usuario of usuarios">
       <ion-thumbnail item-start>
-        <img [src]="crianca?.imageUrl || 'assets/imgs/avatar-blank.png'">
+        <img [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'">
       </ion-thumbnail>
       <h2>{{ usuario.nome }}</h2>
       <button ion-button clear item-end (click)="confirmDelete(usuario.id)">
