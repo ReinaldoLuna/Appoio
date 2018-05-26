@@ -7,6 +7,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { CriancaService } from '../../services/domain/crianca.service';
 import { CriancaDTO } from '../../models/crianca.dto';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class PerfilPage {
   usuario: UsuarioDTO;
   criancas: CriancaDTO[];
   picture: string;
+  profileImage;
   cameraOn: boolean = false;
 
   constructor(
@@ -27,8 +29,10 @@ export class PerfilPage {
     public usuarioService: UsuarioService,
     public camera: Camera,
     public criancaService: CriancaService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public sanitizer: DomSanitizer
   ) {
+    this.profileImage = 'assets/imgs/avatar-blank.png';
   }
 
   ionViewDidLoad() {
@@ -66,11 +70,25 @@ export class PerfilPage {
 
   getImageIfExists() {
     this.usuarioService.getImageFromBucket(this.usuario.id)
-      .subscribe(respose => {
-        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
-      }, error => { })
+      .subscribe(response => {
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`;
+        this.blobToDataURL(response).then(dataUrl => {
+          let str = dataUrl as string;
+          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+        })
+      }, error => {
+        this.profileImage = 'assets/imgs/avatar-blank.png';
+      })
   }
 
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = (e) => fulfill(reader.result);
+      reader.readAsDataURL(blob)
+    })
+  }
 
   loadImgageUrls() {
     for (var i = 0; i < this.criancas.length; i++) {
@@ -100,7 +118,6 @@ export class PerfilPage {
       this.cameraOn = false;
     });
   }
-
 
   getGaleryPicture() {
 
@@ -135,7 +152,7 @@ export class PerfilPage {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
-        this.loadData();
+        this.getImageIfExists();
       }, error => { })
   }
 

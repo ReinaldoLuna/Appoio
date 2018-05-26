@@ -6,6 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { RecomendacoesService } from '../../services/domain/recomendacoes.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class CriancaDetailPage {
   usuarios;
   recomendacoes;
   picture: string;
+  profileImage;
   cameraOn: boolean = false;
 
 
@@ -29,8 +31,10 @@ export class CriancaDetailPage {
     public loadingCtrl: LoadingController,
     public usuarioService: UsuarioService,
     public alertCtrl: AlertController,
-    public recomendacoesService: RecomendacoesService
+    public recomendacoesService: RecomendacoesService,
+    public sanitizer: DomSanitizer
   ) {
+    this.profileImage = 'assets/imgs/avatar-blank.png';
   }
 
   crianca_id = this.navParams.get('crianca_id');
@@ -71,9 +75,25 @@ export class CriancaDetailPage {
 
   getImageIfExists() {
     this.criancaService.getImageFromBucket(this.crianca.id)
-      .subscribe(respose => {
+      .subscribe(response => {
         this.crianca.imageUrl = `${API_CONFIG.bucketBaseUrl}/crianca_id${this.crianca.id}.jpg`;
-      }, error => { })
+        this.blobToDataURL(response).then(dataUrl => {
+          let str = dataUrl as string;
+          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+        })
+      }, error => {
+        this.profileImage = 'assets/imgs/avatar-blank.png';
+      })
+  }
+
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = (e) => fulfill(reader.result);
+      reader.readAsDataURL(blob)
+    })
   }
 
   loadImgageUrls() {
@@ -186,7 +206,7 @@ export class CriancaDetailPage {
     this.criancaService.uploadPicture(this.picture, this.crianca.id)
       .subscribe(response => {
         this.picture = null;
-        this.getCrianca();
+        this.getImageIfExists();
       }, error => { })
   }
 
