@@ -77,7 +77,6 @@ export class CriancaDetailPage {
   }
 
   loadImgageUrls(){
-    console.log(this.usuarios)
     for(var i = 0; i<this.usuarios.length; i++){
       let usuario = this.usuarios[i];
       this.usuarioService.getImageFromBucket(usuario.id)
@@ -154,6 +153,24 @@ export class CriancaDetailPage {
     });
   }
 
+  getGaleryPicture() {
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
+    }, (err) => {
+    });
+  }
+
   presentLoading() {
     let loader = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -164,7 +181,7 @@ export class CriancaDetailPage {
   }
 
   sendPicture() {
-    this.criancaService.uploadPicture(this.picture)
+    this.criancaService.uploadPicture(this.picture, this.crianca.id)
       .subscribe(response => {
         this.picture = null;
         this.getCrianca();

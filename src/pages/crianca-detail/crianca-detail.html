@@ -16,10 +16,15 @@
   <h2 text-center>{{ crianca?.nome }}</h2>
   <p text-center>{{ crianca?.dataNascimento }}</p>
   <p text-center>{{ crianca?.colegio }}</p>
+
+  <ion-item *ngIf="picture">
+    <img [src]="picture">
+  </ion-item>
   <ion-item>
     <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
-    <button *ngIf="picture" ion-button outline (click)="sendPicture()">Salvar imagem</button>
-    <button *ngIf="picture" ion-button outline (click)="cancel()">Cancelar</button>
+    <button ion-button block (click)="getGaleryPicture()" [disabled]="cameraOn">Galeria</button>
+    <button *ngIf="picture" ion-button outline block (click)="sendPicture()">Salvar imagem</button>
+    <button *ngIf="picture" ion-button outline block (click)="cancel()">Cancelar</button>
   </ion-item>
 
 
