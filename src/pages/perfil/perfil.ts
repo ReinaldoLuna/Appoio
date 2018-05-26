@@ -64,61 +64,63 @@ export class PerfilPage {
     }
   }
 
-getImageIfExists() {
-  this.usuarioService.getImageFromBucket(this.usuario.id)
-    .subscribe(respose => {
-      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
-    }, error => { })
-}
-
-
-loadImgageUrls(){
-  for(var i = 0; i<this.criancas.length; i++){
-    let crianca = this.criancas[i];
-    this.criancaService.getImageFromBucket(crianca.id)
-    .subscribe( response => {
-      crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${crianca.id}.jpg`;
-    }, error => { })
-  }
-}
-
-getCameraPicture() {
-
-  this.cameraOn = true;
-
-  const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.PNG,
-    mediaType: this.camera.MediaType.PICTURE
+  getImageIfExists() {
+    this.usuarioService.getImageFromBucket(this.usuario.id)
+      .subscribe(respose => {
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${this.usuario.id}.jpg`
+      }, error => { })
   }
 
-  this.camera.getPicture(options).then((imageData) => {
-    this.picture = 'data:image/png;base64,' + imageData;
-    this.cameraOn = false;
-  }, (err) => {
-  });
-}
 
-
-getGaleryPicture() {
-
-  this.cameraOn = true;
-
-  const options: CameraOptions = {
-    quality: 100,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.PNG,
-    mediaType: this.camera.MediaType.PICTURE
+  loadImgageUrls() {
+    for (var i = 0; i < this.criancas.length; i++) {
+      let crianca = this.criancas[i];
+      this.criancaService.getImageFromBucket(crianca.id)
+        .subscribe(response => {
+          crianca.imageUrl = `${API_CONFIG.bucketBaseUrl}/crianca_id${crianca.id}.jpg`;
+        }, error => { })
+    }
   }
 
-  this.camera.getPicture(options).then((imageData) => {
-    this.picture = 'data:image/png;base64,' + imageData;
-    this.cameraOn = false;
-  }, (err) => {
-  });
-}
+  getCameraPicture() {
+
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
+    }, (err) => {
+      this.cameraOn = false;
+    });
+  }
+
+
+  getGaleryPicture() {
+
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
+    }, (err) => {
+      this.cameraOn = false;
+    });
+  }
 
   presentLoading() {
     let loader = this.loadingCtrl.create({

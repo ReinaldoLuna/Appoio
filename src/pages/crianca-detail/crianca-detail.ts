@@ -72,17 +72,17 @@ export class CriancaDetailPage {
   getImageIfExists() {
     this.criancaService.getImageFromBucket(this.crianca.id)
       .subscribe(respose => {
-        this.crianca.imageUrl = `${ API_CONFIG.bucketBaseUrl }/crianca_id${this.crianca.id}.jpg`;
+        this.crianca.imageUrl = `${API_CONFIG.bucketBaseUrl}/crianca_id${this.crianca.id}.jpg`;
       }, error => { })
   }
 
-  loadImgageUrls(){
-    for(var i = 0; i<this.usuarios.length; i++){
+  loadImgageUrls() {
+    for (var i = 0; i < this.usuarios.length; i++) {
       let usuario = this.usuarios[i];
       this.usuarioService.getImageFromBucket(usuario.id)
-      .subscribe( response => {
-        usuario.imageUrl = `${ API_CONFIG.bucketBaseUrl }/usuario_id${usuario.id}.jpg`;
-      }, error => { })
+        .subscribe(response => {
+          usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/usuario_id${usuario.id}.jpg`;
+        }, error => { })
     }
   }
 
@@ -150,6 +150,7 @@ export class CriancaDetailPage {
       this.picture = 'data:image/png;base64,' + imageData;
       this.cameraOn = false;
     }, (err) => {
+      this.cameraOn = false;
     });
   }
 
@@ -168,6 +169,7 @@ export class CriancaDetailPage {
       this.picture = 'data:image/png;base64,' + imageData;
       this.cameraOn = false;
     }, (err) => {
+      this.cameraOn = false;
     });
   }
 
