@@ -99,7 +99,7 @@ export class PerfilPage {
         }, error => { })
     }
   }
-
+/*
   getCameraPicture() {
 
     this.cameraOn = true;
@@ -118,7 +118,7 @@ export class PerfilPage {
       this.cameraOn = false;
     });
   }
-
+*/
   getGaleryPicture() {
 
     this.cameraOn = true;

@@ -21,7 +21,6 @@
     <img [src]="picture">
   </ion-item>
   <ion-item>
-    <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
     <button ion-button block (click)="getGaleryPicture()" [disabled]="cameraOn">Galeria</button>
     <button *ngIf="picture" ion-button outline block (click)="sendPicture()">Salvar imagem</button>
     <button *ngIf="picture" ion-button outline block (click)="cancel()">Cancelar</button>
@@ -59,6 +58,6 @@
     <button *ngIf="medico" ion-button outline block (click)="addRecomendacao(crianca.id)">Nova Recomendação Médica</button>
   </ion-list>
 
-  <button ion-button block (click)="editCrianca(crianca.id)">Editar Crianca</button>
+  <button ion-button block (click)="editCrianca(crianca.id)">Editar Criança</button>
 
 </ion-content>

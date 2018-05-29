@@ -52,7 +52,6 @@ export class CriancaService {
     }
 
     uploadPicture(picture, crianca_id: string) {
-        console.log(crianca_id);
         let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
         let formData: FormData = new FormData();
         formData.set('file', pictureBlob, 'file.png');

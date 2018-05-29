@@ -26,19 +26,14 @@
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="senha" type="password"></ion-input>
     </ion-item>
-    <p *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors" margin-left> Senha inválido</p>
+    <p *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors" margin-left> Senha inválida</p>
 
     <ion-item>
       <ion-label stacked>Telefone*</ion-label>
       <ion-input formControlName="telefone" type="text"></ion-input>
     </ion-item>
     <p *ngIf="formGroup.controls.telefone.dirty && formGroup.controls.telefone.errors" margin-left> Telefone inválido</p>
-
-    <ion-item>
-      <ion-label stacked>Foto</ion-label>
-      <ion-input formControlName="foto" type="text"></ion-input>
-    </ion-item>
-
+    
     <ion-list>
       <ion-item>
         <ion-label>Eu Sou...</ion-label>

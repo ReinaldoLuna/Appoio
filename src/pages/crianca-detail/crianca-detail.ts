@@ -155,7 +155,7 @@ export class CriancaDetailPage {
   showDetail(recomendacao_id: string, tipo_medico: boolean) {
     this.navCtrl.push('RecomendacaoDetailPage', { recomendacao_id: recomendacao_id, tipo_medico: this.medico });
   }
-
+/*
   getCameraPicture() {
     this.cameraOn = true;
 
@@ -173,7 +173,7 @@ export class CriancaDetailPage {
       this.cameraOn = false;
     });
   }
-
+*/
   getGaleryPicture() {
     this.cameraOn = true;
 
