@@ -46,7 +46,8 @@
       <ion-thumbnail item-start>
         <img [src]="usuario?.imageUrl || 'assets/imgs/avatar-blank.png'">
       </ion-thumbnail>
-      <h2>{{ usuario.nome }}</h2>
+      <h2>{{ usuario?.nome }}</h2>
+      <p>{{ usuario?.tipo }}</p>
       <button ion-button clear item-end (click)="confirmDelete(usuario.id)">
         <ion-icon *ngIf="delete_usuario" name="trash"></ion-icon>
       </button>
@@ -54,6 +55,8 @@
   </ion-list>
 
   <ion-list no-lines>
+<h2 style="text-align: center" *ngIf="recomendacoes">Recomendações médicas</h2>
+
     <button ion-item *ngFor="let recomendacao of recomendacoes" (click)="showDetail(recomendacao.id)">
       <h2>{{ recomendacao?.observacao}}</h2>
       <p>
